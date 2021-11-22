@@ -24,7 +24,7 @@ valor correto. Agora esse problema foi corrigido (era um problema muito escondid
 Para o funcionamento da memória, tudo foi separado em duas etapas, basicamente controladas pelo clock.
 Foi implementado dessa maneira para ter certeza de que não houvesse nenhuma condição de corrida.
 
-```text
+```
 # lerTecla up:
 	Armazena em um flipflop que o modo é leitura (por default, é escrita)
 
@@ -54,5 +54,8 @@ Para esse funcionamento especificado acima, foram utilizados 5 flipflops:
 
 Também foram utilizados 4 flipflops para servir como registrador.
 
-Para evitar uma condição de corrida na hora da escrita (pois há o endereço muda, e é feito uma leitura na memória),
-foi utilizado um bit a mais na memória, para saber quando que a leitura foi executada. É possível que isso não era necessário, mas foi deixado no circuito como garantia de funcionamento.
+Como ao utilizar a memória para leitura é feita uma alteração no endereço e uma leitura ao mesmo tempo, foi utilizado um bit a mais na memória para saber quando que a leitura foi executada. Essa solução foi pensada pois é pedido pelo enunciado o uso do chip 1k x 8, de forma que esse bit "extra" está disponível e não interfere com o restante do projeto. É possível que isso nem fosse necessário, mas foi deixado no circuito como garantia do funcionamento.
+O mais correto seria dividir a etapa da leitura em três partes: mudança de endereço, leitura, e alteração dos contadores.
+Porém, para a solução acima ser implementada, seria necessário um contador, ou um flipflop a mais. 
+Então, como havia a possibilidade de usar um bit da memória que não está sendo usado, preferimos usar essa implementação.
+Por isso, ao clicar na memória, é possível ver que um valor de 0x5 é armazenado como 0x15. 
